@@ -27,10 +27,11 @@ def create_gig(request):
             gig.save()
             return redirect('my_gigs')
         else:
+            print(gig_form.errors)
             error = "Data is not valid"
 
     gig_form = GigForm()
-    return render(request, 'create_gig.html', {"gig_form": gig_form, "error": error})
+    return render(request, 'create_gig.html', {"error": error})
 
 @login_required(login_url="/")
 def my_gigs(request):
