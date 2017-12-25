@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^edit_gig/(?P<id>[0-9]+)/$', views.edit_gig, name='edit_gig'),
     url(r'^profile/(?P<username>\w+)/$', views.profile, name='profile'),
     url(r'^checkout/$', views.create_purchase, name='create_purchase'),
+    url(r'^my_sales/$', views.my_sales, name='my_sales'),
+    url(r'^my_purchases/$', views.my_purchases, name='my_purchases'),
 ]
