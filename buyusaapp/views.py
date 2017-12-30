@@ -14,6 +14,11 @@ def home(request):
     return render(request, 'home.html', {"gigs": gigs})
 
 def gig_detail(request, id):
+    if request.method == 'POST' and \
+        not request.user.is_anonymous() and \
+        'content' in request.POST and \
+        request.POST['content'].strip() != '':
+        Review.objects.create(content=request.POST['content'], gig_id=id, user=request.user )
     try:
         gig = Gig.objects.get(id=id)
     except Gig.DoesNotExist:
