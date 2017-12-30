@@ -16,7 +16,7 @@ def home(request):
 def gig_detail(request, id):
     if request.method == 'POST' and \
         not request.user.is_anonymous() and \
-        Purchase.objects.filter(gig_id=id, buyer=request.user).count > 0 and \
+        Purchase.objects.filter(gig_id=id, buyer=request.user).count() > 0 and \
         'content' in request.POST and \
         request.POST['content'].strip() != '':
         Review.objects.create(content=request.POST['content'], gig_id=id, user=request.user )
@@ -26,8 +26,8 @@ def gig_detail(request, id):
         return redirect('/')
     
     if request.user.is_anonymous() or \
-        Purchase.objects.filter(gig=gig, buyer=request.user).count == 0 or \
-        Review.objects.filter(gig=gig, user=request.user).count > 0:
+        Purchase.objects.filter(gig=gig, buyer=request.user).count() == 0 or \
+        Review.objects.filter(gig=gig, user=request.user).count() > 0:
         show_post_review = False
     else:
         show_post_review = Purchase.objects.filter(gig=gig, buyer=request.user).count() > 0
