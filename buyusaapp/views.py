@@ -121,11 +121,11 @@ def my_purchases(request):
 
 def category(request, link):
     categories = {
-        "Category 1": "C1",
-        "Category 2": "C2",
-        "Category 3": "C3",
-        "Category 4": "C4",
-        "Category 5": "C5",
+        "category-1": "C1",
+        "category-2": "C2",
+        "category-3": "C3",
+        "category-4": "C4",
+        "category-5": "C5",
     }
     try:
         gigs = Gig.objects.filter(category=categories[link])
