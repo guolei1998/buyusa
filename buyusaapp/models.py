@@ -8,6 +8,14 @@ class Profile(models.Model):
     avatar = models.CharField(max_length=500)
     about = models.CharField(max_length=1000)
     slogan = models.CharField(max_length=500)
+    # Below are fields added for BuyUSA - TCG
+    CompanyName = models.CharField(max_length=50)
+    CompanyLogo = models.FileField(upload_to='profile')
+    CompanyLink = models.CharField(max_length=50)
+    BBB = models.BooleanField(default=True)
+    CompanyContactName = models.CharField(max_length=50)
+    CompanyContactPhone = models.CharField(max_length=50)
+    CompanyContactEmail = models.CharField(max_length=50)
 
     def __str__(self):
         return self.user.username
@@ -48,3 +56,4 @@ class Review(models.Model):
 
     def __str__(self):
         return self.content
+
