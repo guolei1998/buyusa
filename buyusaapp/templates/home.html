@@ -10,11 +10,23 @@
         {% for gig in gigs %}
             <div class="col-md-3">
                 <div class="thumbnail">
+                    <!-- *** BEGIN - Replacing this code with code below it. - TCG - 1/21/18***
                     <a href="{% url 'gig_detail' gig.id %}"><img src="/media/{{ gig.photo }}"></a>
                     <div class="caption">
                         <p><a href="{% url 'gig_detail' gig.id %}">{{ gig.title }}</a></p>
                         <p><span>by <a href="{% url 'profile' gig.user.username %}">{{ gig.user.username }}</a></span><b class="green pull-right">${{ gig.price }}</b></p>
                     </div>
+                        *** END - Replacing this code with code below it. - TCG - 1/21/18*** -->
+                     <!-- *** BEGIN - Replacing the above code with this. - TCG - 1/21/18*** -->
+                     <a href="{% url 'gig_detail' gig.id %}"><img src="/media/{{ gig.photo }}"></a>
+                    <div class="caption">
+                        <p><a href="{% url 'gig_detail' gig.id %}">{{ gig.title }}</a></p>
+                        <p><img src="/media/{{ gig.BrandLogo }}" width="100%"></p>
+                        <p>by <a href="{% url 'profile' gig.user.username %}">{{ gig.user.CompanyName }}</a></p>
+                        <hr>
+                        <p>Available at: {{ gig.BrandWhereToBuy }}</a></p>
+                    </div>
+                     <!-- *** END - Replacing the above code with this. - TCG - 1/21/18*** -->
                 </div>
             </div>
         {% endfor %}
