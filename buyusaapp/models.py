@@ -24,15 +24,15 @@ class Profile(models.Model):
     about = models.CharField(max_length=1000)
     slogan = models.CharField(max_length=500)
     # *** BEGIN - Fields added for BuyUSA - TCG - 1/19/18 ***
-    CompanyName = models.CharField(max_length=50)
-    CompanyCategory = models.CharField(max_length=3, choices=COMPANYCATEGORY_CHOICES)
-    CompanyType = models.CharField(max_length=12, choices=COMPANYTYPE_CHOICES)
-    CompanyLogo = models.FileField(upload_to='profile')
-    CompanyLink = models.CharField(max_length=50)
+    CompanyName = models.CharField(max_length=50, default='')
+    CompanyCategory = models.CharField(max_length=3, choices=COMPANYCATEGORY_CHOICES, default='b2c')
+    CompanyType = models.CharField(max_length=12, choices=COMPANYTYPE_CHOICES, default='manufacturer')
+    CompanyLogo = models.FileField(upload_to='profile', default='')
+    CompanyLink = models.CharField(max_length=50, default='')
     BBB = models.BooleanField(default=True)
-    CompanyContactName = models.CharField(max_length=50)
-    CompanyContactPhone = models.CharField(max_length=50)
-    CompanyContactEmail = models.CharField(max_length=50)
+    CompanyContactName = models.CharField(max_length=50, default='')
+    CompanyContactPhone = models.CharField(max_length=50, default='')
+    CompanyContactEmail = models.CharField(max_length=50, default='')
     CompanyJoined = models.DateTimeField(default=timezone.now)
     # *** END - Fields added for BuyUSA - TCG - 1/19/18 ***
 
