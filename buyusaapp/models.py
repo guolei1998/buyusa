@@ -51,7 +51,7 @@ class Gig(models.Model):
     title = models.CharField(max_length=500)
     category = models.CharField(max_length=2, choices=CATEGORY_CHOICES)
     description = models.CharField(max_length=1000)
-    BrandLogo = models.FileField(upload_to='gig')
+    BrandLogo = models.FileField(upload_to='gigs')
     BrandLink = models.CharField(max_length=50)
     BrandSearch = models.CharField(max_length=500)
     BrandWhereToBuy = models.CharField(max_length=200)
