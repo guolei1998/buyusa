@@ -53,6 +53,7 @@ class Gig(models.Model):
     description = models.CharField(max_length=1000)
     BrandLogo = models.FileField(upload_to='gigs', default='')
     BrandLink = models.CharField(max_length=50, default='')
+    BrandCustomerServicePhone = models.CharField(max_length=50, default='')
     BrandSearch = models.CharField(max_length=500, default='')
     BrandWhereToBuy = models.CharField(max_length=200, default='')
     price = models.IntegerField(default=6)

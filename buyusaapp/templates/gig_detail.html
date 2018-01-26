@@ -24,10 +24,11 @@
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <img src="/media/{{ gig.BrandLogo }}" class="img-responsive center-block" style="display:inline-block; float:right; padding: 0px 0px 20px 20px;">
+                    <img src="/media/{{ gig.BrandLogo }}" class="img-responsive center-block" width="45%" style="float:right; padding: 0px 0px 20px 20px;">
                     <h3>{{ gig.title }}</h3>
                     <hr />
                     <p>Website: <a href="{{ gig.BrandLink }}" target="_blank">{{ gig.BrandLink }}</a></p>
+                    <p>Customer Service: {{ gig.BrandCustomerServicePhone }}</p>
                     <p>Buy This At: {{ gig.BrandWhereToBuy }}</p>
                 </div>
             </div>
@@ -38,17 +39,6 @@
                     <p><img src="/media/{{ gig.photo }}" class="img-responsive center-block" width="18%"> <img src="/media/{{ gig.BrandPicture2 }}" class="img-responsive center-block" width="18%"> <img src="/media/{{ gig.BrandPicture3 }}" class="img-responsive center-block" width="18%"> <img src="/media/{{ gig.BrandPicture4 }}" class="img-responsive center-block" width="18%"> <img src="/media/{{ gig.BrandPicture5 }}" class="img-responsive center-block" width="18%"></p>
                 </div>
             </div>
-            <!-- *** BEGIN - New section: Location Info - TCG - 1/26/18 *** -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4>Buy This Brand</h4>
-                </div>
-                <div class="panel-body">
-                    <p>Website: {{ gig.BrandLink }}</p>
-                    <p>Location: {{ gig.BrandWhereToBuy }}</p>
-                </div>
-            </div>
-            <!-- *** BEGIN - New section: Location Info - TCG - 1/26/18 *** -->
             <!-- *** BEGIN - Hide Review functionality - TCG - 1/26/18 *** -->
             <!--
             <div class="panel panel-default">
