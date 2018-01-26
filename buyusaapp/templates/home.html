@@ -23,7 +23,7 @@
                         <h2><a href="{% url 'gig_detail' gig.id %}">{{ gig.title }}</a></h2>
                         <!-- <p><img src="/media/{{ gig.BrandLogo }}" width="100%"></p> -->
                         <!-- <p>by <a href="{% url 'profile' gig.user.username %}">{{ gig.user.CompanyName }}</a></p> -->
-                        {{ gig.about }}
+                        {{ gig.description }}
                         <hr>
                         <p>Available at: {{ gig.BrandWhereToBuy }}</a></p>
                     </div>
