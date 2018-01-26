@@ -26,7 +26,7 @@
                 <div class="panel-body">
                     <h3>{{ gig.title }}</h3>
                     <hr />
-                    <img src="/media/{{ gig.photo }}" class="img-responsive center-block">
+                    <img src="/media/{{ gig.BrandLogo }}" class="img-responsive center-block">
                 </div>
             </div>
             <div class="panel panel-default">
@@ -35,6 +35,8 @@
                 </div>
                 <div class="panel-body">
                     <p>{{ gig.description }}</p>
+                    <hr>
+                    <p><img src="/media/{{ gig.photo }}" class="img-responsive center-block" width="18%"> <img src="/media/{{ gig.BrandPicture2 }}" class="img-responsive center-block" width="18%"> <img src="/media/{{ gig.BrandPicture3 }}" class="img-responsive center-block" width="18%"> <img src="/media/{{ gig.BrandPicture4 }}" class="img-responsive center-block" width="18%"> <img src="/media/{{ gig.BrandPicture5 }}" class="img-responsive center-block" width="18%"></p>
                 </div>
             </div>
             <!-- *** BEGIN - New section: Location Info - TCG - 1/26/18 *** -->
