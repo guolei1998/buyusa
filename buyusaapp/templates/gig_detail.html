@@ -24,15 +24,14 @@
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <img src="/media/{{ gig.BrandLogo }}" class="img-responsive center-block" style="display:inline-block; float:right; padding: 0px 0px 20px 20px;">
                     <h3>{{ gig.title }}</h3>
                     <hr />
-                    <img src="/media/{{ gig.BrandLogo }}" class="img-responsive center-block">
+                    <p>Website: <a href="{{ gig.BrandLink }}" target="_blank">{{ gig.BrandLink }}</a></p>
+                    <p>Buy This At: {{ gig.BrandWhereToBuy }}</p>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4>About This Brand</h4>
-                </div>
                 <div class="panel-body">
                     <p>{{ gig.description }}</p>
                     <hr>
