@@ -30,14 +30,27 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4>About This Brand</h4>
-                    </div>
-                    <div class="panel-body">
-                        <p>{{ gig.description }}</p>
-                    </div>
+                <div class="panel-heading">
+                    <h4>About This Brand</h4>
                 </div>
-                <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>{{ gig.description }}</p>
+                </div>
+            </div>
+            <!-- *** BEGIN - New section: Location Info - TCG - 1/26/18 *** -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Buy This Brand</h4>
+                </div>
+                <div class="panel-body">
+                    <p>Website: {{ gig.BrandLink }}</p>
+                    <p>Location: {{ gig.BrandWhereToBuy }}</p>
+                </div>
+            </div>
+            <!-- *** BEGIN - New section: Location Info - TCG - 1/26/18 *** -->
+            <!-- *** BEGIN - Hide Review functionality - TCG - 1/26/18 *** -->
+            <!--
+            <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4>Review</h4>
                     </div>
@@ -71,7 +84,9 @@
                             </li>
                         {% endfor %}
                     </ul>
-                </div>
+            </div>
+            -->
+            <!-- *** END - Hide Review functionality - TCG - 1/26/18 *** -->
         </div>
         <div class="col-md-4">
             <div class="panel panel-default">
