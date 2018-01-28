@@ -57,7 +57,7 @@ class Gig(models.Model):
     BrandSearch = models.CharField(max_length=500, default='')
     BrandWhereToBuy = models.CharField(max_length=200, default='')
     # price = models.IntegerField(default=6)
-    photo = models.FileField(upload_to='gigs', default='')
+    # photo = models.FileField(upload_to='gigs', default='')
     BrandPicture1 =  models.FileField(upload_to='gigs', default='')
     BrandPicture2 =  models.FileField(upload_to='gigs', default='')
     BrandPicture3 =  models.FileField(upload_to='gigs', default='')
