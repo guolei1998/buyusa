@@ -17,7 +17,7 @@
                 {% csrf_token %}
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">GIG TITLE</label>
+                    <label class="col-sm-2 control-label">Brand or Product Name:</label>
                     <div class="col-sm-10">
                         <textarea rows="3" class="form-control" name="title"></textarea>
                     </div>
@@ -34,22 +34,86 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">DESCRIPTION</label>
-                    <div class="col-sm-10">
-                        <textarea rows="5" class="form-control" name="description"></textarea>
-                    </div>
-                </div>
+                <!-- > *** BEGIN - Removed for BuyUSA - TCG - 1/28/18 *** -->
+                <!-- 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">PRICE ($)</label>
                     <div class="col-sm-10">
                         <input type="number" class="form-control" value="6" name="price">
                     </div>
                 </div>
+                -->
+                <!-- *** END - Removed for BuyUSA - TCG - 1/28/18 *** -->
+
+                <!-- *** Added new fields - TCG - 1/28/18 ***
+                    BrandName >>> title
+                    BrandLogo
+                    BrandLink
+                    BrandDescription (1000 characters - basic html - no JS) >>> description
+                    BrandSearch (1000 characters - no html)
+                    BrandWhereToBuy (200 characters - no html)
+                    BrandPicture1 >>> photo
+                    BrandPicture2
+                    BrandPicture3
+                    BrandPicture4
+                    BrandPicture5
+                    BrandCategory >>> category
+                    BrandCustomerServicePhone
+                -->
+
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">PHOTO</label>
+                    <label class="col-sm-2 control-label">BRAND LOGO</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" name="BrandLogo">
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">CUSTOMER SERVICE PHONE</label>
+                        <div class="col-sm-10">
+                            <textarea rows="3" class="form-control" name="BrandCustomerServicePhone"></textarea>
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">DESCRIPTION</label>
+                    <span style="text-decoration: italic; font-size: .7em;">Describe your brand, products, and any selling points. This is your chance to influence the visitor to consider your products.</span>
+                    <div class="col-sm-10">
+                        <textarea rows="5" class="form-control" name="description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">BRAND SEARCH</label>
+                    <span style="text-decoration: italic; font-size: .7em;">Add any keywords you would like people to type in to find you. Keywords can include your products, types of products, etc.</span>
+                    <div class="col-sm-10">
+                        <textarea rows="5" class="form-control" name="BrandSearch"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">WHERE YOUR BRAND IS SOLD</label>
+                    <span style="text-decoration: italic; font-size: .7em;">List a brick-and-mortar store or website here that sells this particular brand.</span>
+                    <div class="col-sm-10">
+                        <textarea rows="5" class="form-control" name="BrandWhereToBuy"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">PHOTO 1</label>
                     <div class="col-sm-10">
                         <input type="file" class="form-control" name="photo">
+                    </div>
+                    <label class="col-sm-2 control-label">PHOTO 2</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" name="BrandPicture2">
+                    </div>
+                    <label class="col-sm-2 control-label">PHOTO 3</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" name="BrandPicture3">
+                    </div>
+                    <label class="col-sm-2 control-label">PHOTO 4</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" name="BrandPicture4">
+                    </div>
+                    <label class="col-sm-2 control-label">PHOTO 5</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" name="BrandPicture5">
                     </div>
                 </div>
                 <div class="form-group">
