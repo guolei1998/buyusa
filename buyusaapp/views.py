@@ -43,6 +43,8 @@ def create_gig(request):
         if gig_form.is_valid():
             gig = gig_form.save(commit=False)
             gig.user = request.user
+            # *** BEGIN - Since I have taken "price" out of the list of fields, giving it a value here until I remove the functionality completely. - TCG - 1/26/18 ***
+            gig.price = ''
             gig.save()
             return redirect('my_gigs')
         else:

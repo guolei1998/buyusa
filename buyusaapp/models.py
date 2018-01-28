@@ -21,8 +21,8 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.CharField(max_length=500)
-    about = models.CharField(max_length=1000)
-    slogan = models.CharField(max_length=500)
+    about = models.CharField(max_length=1000, default='')
+    slogan = models.CharField(max_length=500, default='')
     # *** BEGIN - Fields added for BuyUSA - TCG - 1/19/18 ***
     CompanyName = models.CharField(max_length=50, default='')
     CompanyCategory = models.CharField(max_length=3, choices=COMPANYCATEGORY_CHOICES, default='b2c')
@@ -49,15 +49,15 @@ class Gig(models.Model):
     }
 
     title = models.CharField(max_length=500)
-    category = models.CharField(max_length=2, choices=CATEGORY_CHOICES)
-    description = models.CharField(max_length=1000)
+    category = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default='')
+    description = models.CharField(max_length=1000, default='')
     BrandLogo = models.FileField(upload_to='gigs', default='')
     BrandLink = models.CharField(max_length=50, default='')
     BrandCustomerServicePhone = models.CharField(max_length=50, default='')
     BrandSearch = models.CharField(max_length=500, default='')
     BrandWhereToBuy = models.CharField(max_length=200, default='')
-    price = models.IntegerField(default=6)
-    photo = models.FileField(upload_to='gigs')
+    price = models.IntegerField(default=6, default='')
+    photo = models.FileField(upload_to='gigs', default='')
     BrandPicture2 =  models.FileField(upload_to='gigs', default='')
     BrandPicture3 =  models.FileField(upload_to='gigs', default='')
     BrandPicture4 =  models.FileField(upload_to='gigs', default='')
