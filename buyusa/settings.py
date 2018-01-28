@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'buyusaapp',
     'social.apps.django_app.default',
+    'django_truncate',
 ]
 
 MIDDLEWARE_CLASSES = [
