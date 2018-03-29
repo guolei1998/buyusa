@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block page %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <img src="/media/{{ gig.BrandLogo }}" class="img-responsive center-block" width="45%" style="float:right; padding: 0px 0px 20px 20px;">
+                    <h3>{{ gig.title }}</h3>
+                    <hr />
+                    <p>Website: <a href="{{ gig.BrandLink }}" target="_blank">{{ gig.BrandLink }}</a></p>
+                    <p>Customer Service: {{ gig.BrandCustomerServicePhone }}</p>
+                    <p>Buy This At: {{ gig.BrandWhereToBuy }}</p>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>{{ gig.description | safe }}</p>
+                    <hr>
+                    <div>
+                    
+                    <span style="width: 20%; float:left; padding: 10px;"><img src="/media/{{ gig.BrandPicture1 }}" class="img-responsive center-block" width="100%"></span>
+                    <span style="width: 20%; float:right; padding: 10px;"><img src="/media/{{ gig.BrandPicture2 }}" class="img-responsive center-block" width="100%"></span>
+                    <span style="width: 20%; float:right; padding: 10px;"><img src="/media/{{ gig.BrandPicture3 }}" class="img-responsive center-block" width="100%"></span>
+                    <span style="width: 20%; float:right; padding: 10px;"><img src="/media/{{ gig.BrandPicture4 }}" class="img-responsive center-block" width="100%"></span>
+                    <span style="width: 20%; float:right; padding: 10px;"><img src="/media/{{ gig.BrandPicture5 }}" class="img-responsive center-block" width="100%"></span>
+                    <span style="width: 20%; float:right; padding: 10px;"><img src="/media/{{ gig.BrandPicture6 }}" class="img-responsive center-block" width="100%"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- *** BEGIN - Hide Review functionality - TCG - 1/26/18 *** -->
+            <!--
+            <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Review</h4>
+                    </div>
+
+                    {% if show_post_review %}
+                        <div class="panel-body">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <textarea name="content" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success">Post</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    {% endif %}
+                    <ul class="list-group">
+                        {% for review in reviews %}
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img src="{{ review.user.profile.avatar }}" class="img-circle center-block" height="60" width="60">
+                                    </div>
+                                <div class="col-md-10">
+                                    <h5>{{ review.user.username }}</h5>
+                                    <p>{{ review.content }}</p>
+                                </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+            </div>
+            -->
+            <!-- *** END - Hide Review functionality - TCG - 1/26/18 *** -->
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    {% if user and not user.is_anonymous %}
+                        <form method="POST" action="/checkout/">
+                            {% csrf_token %}
+                            <div id="payment-form">
+                                <input name="gig_id" value="{{ gig.id }}" hidden>
+                                <button type="submit" class="btn btn-success btn-block">Order Now ($ {{ gig.price }})</button>
+                            </div>
+                        </form>
+
+                        <script src="https://js.braintreegateway.com/js/braintree-2.30.0.min.js"></script>
+                        <script>
+                            $(document).ready(function() {
+                                braintree.setup("{{ client_token }}", "dropin", {
+                                    container: "payment-form",
+                                    paypal: {
+                                        singleUse: true,
+                                        amount: "{{ gig.price }}",
+                                        currency: 'USD'
+                                    }
+                                })
+                            })
+                        </script>
+                    {% else %}
+                        You need to login to order this gig!
+                    {% endif %}
+                    
+                </div>
+            </div>
+            <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img src="{% if gig.user.profile %} {{ gig.user.profile.avatar }} {% else %} {% static 'img/avatar.png' %} {% endif %}" class="img-circle center-block" height="100" width="100">
+                        <a href="{% url 'profile' gig.user.username %}"><h4 class="text-center">{{ gig.user.username }}</h4></a>
+                        <hr />
+                        <p>{{ gig.user.profile.about }}</p>
+                    </div>
+                </div>
+        </div>
+    </div>
+{% endblock %}
