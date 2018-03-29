@@ -36,7 +36,8 @@ def gig_detail(request, id):
         show_post_review = Purchase.objects.filter(gig=gig, buyer=request.user).count() > 0
     reviews = Review.objects.filter(gig=gig)
     client_token = braintree.ClientToken.generate()
-    return render(request, 'gig_detail.html', {"show_post_review": show_post_review, "reviews":reviews, "gig": gig, "client_token": client_token})
+    return render(request, 'gig_detail.html', {"show_post_review": show_post_review, "reviews":reviews, "gig": gig, 
+                                               "client_token": client_token , "MEDIA_URL" : settings.MEDIA_URL, })
 
 @login_required(login_url="/")
 def create_gig(request):
