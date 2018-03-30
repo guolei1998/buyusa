@@ -25,7 +25,7 @@ SECRET_KEY = '$z-h&j3-_@uiz1++g1m3$f6znq+#f7lc!k+pej#5@9$nz7h=o_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['64.15.183.5','127.0.0.1']
 
 
 # Application definition
@@ -38,17 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'buyusaapp',
+    'social_django',
+    'ckeditor',
+    # 'ckeditor_uploader',
     'social.apps.django_app.default',
     # 'django_truncate',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -61,6 +63,7 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug': True,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -127,6 +130,9 @@ STATIC_URL = '/static/'
 
 # To serve static files on Heroku
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+CKEDITOR_BASEPATH = STATIC_URL + "ckeditor/ckeditor"
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 AUTHENTICATION_BACKENDS = {
     'social.backends.facebook.FacebookOAuth2',

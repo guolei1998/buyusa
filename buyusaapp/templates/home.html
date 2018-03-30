@@ -18,12 +18,12 @@
                     </div>
                         *** END - Replacing this code with code below it. - TCG - 1/21/18*** -->
                      <!-- *** BEGIN - Replacing the above code with this. - TCG - 1/21/18*** -->
-                     <a href="{% url 'gig_detail' gig.id %}"><img src="/media/{{ gig.BrandLogo }}"></a>
+                     <a href="{% url 'gig_detail' gig.id %}"><img src="{{ MEDIA_URL }}{{ gig.BrandLogo }}"></a>
                     <div class="caption">
                         <h2><a href="{% url 'gig_detail' gig.id %}">{{ gig.title }}</a></h2>
                         <!-- <p><img src="/media/{{ gig.BrandLogo }}" width="100%"></p> -->
                         <!-- <p>by <a href="{% url 'profile' gig.user.username %}">{{ gig.user.CompanyName }}</a></p> -->
-                        {{ gig.description }}
+                        {{ gig.description | safe }}
                         <p><a href="{% url 'gig_detail' gig.id %}">Click Here For More Details</a></p>
                         <hr>
                         <p>Available at: {{ gig.BrandWhereToBuy }}</a></p>

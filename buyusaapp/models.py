@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Profile(models.Model):
@@ -38,6 +41,14 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
+
 
 class Gig(models.Model):
     CATEGORY_CHOICES = {
@@ -50,7 +61,7 @@ class Gig(models.Model):
 
     title = models.CharField(max_length=500)
     category = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default='')
-    description = models.CharField(max_length=1000, default='')
+    description = RichTextField(max_length=1000, default='')
     BrandLogo = models.FileField(upload_to='gigs', default='')
     BrandLink = models.CharField(max_length=50, default='')
     BrandCustomerServicePhone = models.CharField(max_length=50, default='')
@@ -63,24 +74,31 @@ class Gig(models.Model):
     BrandPicture3 =  models.FileField(upload_to='gigs', default='')
     BrandPicture4 =  models.FileField(upload_to='gigs', default='')
     BrandPicture5 =  models.FileField(upload_to='gigs', default='')
+    BrandPicture6 =  models.FileField(upload_to='gigs', default='') #　added by guolei 02/23/2017
+    BrandCaption1 = models.CharField(max_length=200, default='')
+    BrandCaption2 = models.CharField(max_length=200, default='')
+    BrandCaption3 = models.CharField(max_length=200, default='')
+    BrandCaption4 = models.CharField(max_length=200, default='')
+    BrandCaption5 = models.CharField(max_length=200, default='')
+    BrandCaption6 = models.CharField(max_length=200, default='')
     status = models.BooleanField(default=True)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     create_time = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title
 
 class Purchase(models.Model):
-    gig = models.ForeignKey(Gig)
-    buyer = models.ForeignKey(User)
+    gig = models.ForeignKey(Gig,on_delete=models.CASCADE)
+    buyer = models.ForeignKey(User,on_delete=models.CASCADE)
     time = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.gig.title
 
 class Review(models.Model):
-    gig = models.ForeignKey(Gig)
-    user = models.ForeignKey(User)
+    gig = models.ForeignKey(Gig,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     content = models.CharField(max_length=500)
 
     def __str__(self):
