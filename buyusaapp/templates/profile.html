@@ -10,15 +10,16 @@
             {% csrf_token %}
             <div class="jumbotron text-center">
                     <h1><b>{{ profile.user.username }}</b></h1>
+                    {{ profile_form.slogan.label }}
                     {{ profile_form.slogan|add_class:"form-control" }}
             </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <img src="{{ profile.avatar }}" class="img-circle" height="120" width="120">
+                    <img src="{{ profile.avatar }}" class="img-circle" height="120" width="120" id="avatar_preview">
                     {{ profile_form.avatar.label }}{{ profile_form.avatar|add_class:"form-control" }}
                     <h3 class="text-uppercase"><b>About {{ profile.user.username }}</h3>
                     <hr>
-                    {{ profile_form.about|add_class:"form-control" }}
+                    {{ profile_form.about.label }}{{ profile_form.about|add_class:"form-control" }}
                     <br />
                     {{ profile_form.CompanyName.label }}{{ profile_form.CompanyName|add_class:"form-control" }}
                     <br />
@@ -26,8 +27,10 @@
                     <br />
                     {{ profile_form.CompanyType.label }}{{ profile_form.CompanyType|add_class:"form-control" }}
                     <br />
-                    <img src="{{ MEDIA_URL }}{{ profile.CompanyLogo }}" class="img-circle" height="120" width="120">
-                    {{ profile_form.CompanyLogo.label }}{{ profile_form.CompanyLogo|add_class:"form-control" }}
+                    <img src="{{ MEDIA_URL }}{{ profile.CompanyLogo }}" class="img-circle" height="120" width="120" id="CompanyLogo_preview">
+                    {{ profile_form.CompanyLogo.label }}
+                    <input type="file" name="CompanyLogo" id="id_CompanyLogo" class="form-control">
+                    
                     <br />
                     {{ profile_form.CompanyLink.label }}{{ profile_form.CompanyLink|add_class:"form-control" }}
                     <br />
@@ -81,4 +84,31 @@
             </div>
         {% endfor %}
     </div>
+    
+{% if request.user == profile.user %}
+<script>
+
+$(function () {
+    $("#id_avatar").change(function () {
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#avatar_preview").attr("src", e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+    $("#id_CompanyLogo").change(function () {
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#CompanyLogo_preview").attr("src", e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+});
+        
+</script>
+{% endif %}
 {% endblock %}

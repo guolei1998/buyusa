@@ -6,8 +6,13 @@
         <div class="col-md-12">
             <img src="{% static 'img/banner.gif' %}" class="banner">
         </div>
-
+    </div>
+    <div class="row">
         {% for gig in gigs %}
+            {% if forloop.counter0|divisibleby:'4' %}
+    </div>
+    <div class="row">
+            {% endif %}
             <div class="col-md-3">
                 <div class="thumbnail">
                     <!-- *** BEGIN - Replacing this code with code below it. - TCG - 1/21/18***
@@ -32,6 +37,6 @@
                 </div>
             </div>
         {% endfor %}
-    </div>
+   </div>
 
 {% endblock %}

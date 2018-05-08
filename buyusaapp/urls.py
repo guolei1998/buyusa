@@ -17,4 +17,10 @@ urlpatterns = [
     
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^signup/$', views.signup, name='signup'),
+    url(r'^resetpassword/$', views.resetpassword, name='resetpassword'),
+    url(r'^donate/$', views.donate, name='donate'),
+    
+    url(r'^importdata/$', views.importdata, name='importdata'),
+    url(r'^firstlogin/(?P<token>[\w|-]+)/$', views.firstlogin, name='firstlogin'),
+    
 ]

@@ -24,7 +24,7 @@
                     <form class="navbar-form navbar-left" role="search" method="GET" action="/search/">
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" name="title" class="form-control" placeholder="Find Products">
+                                <input type="text" name="title" class="form-control" placeholder="Find Products" value="{{ title|default_if_none:'' }}">
                                 <span class="input-group-btn">
                                     <button class="btn btn-success">Find</button>
                                 </span>
@@ -48,7 +48,13 @@
                                     <li><a href="{% url 'my_purchases' %}">My Purchases</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{% url 'profile' user.username %}">My Profile</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{% url 'donate' %}">Donate</a></li>                              
                                     <li><a href="{% url 'auth:logout' %}?next={{request.path}}">Logout</a></li>
+                                    {% if user.is_superuser %}
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{% url 'importdata' %}">Import Data</a></li>
+                                    {% endif %}
                                 </ul>
                             </li>
                         {% else %}

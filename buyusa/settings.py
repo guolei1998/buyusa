@@ -25,7 +25,7 @@ SECRET_KEY = '$z-h&j3-_@uiz1++g1m3$f6znq+#f7lc!k+pej#5@9$nz7h=o_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['64.15.183.5','127.0.0.1']
+ALLOWED_HOSTS = ['64.15.183.5','127.0.0.1','stormy-beach-97292.herokuapp.com']
 
 
 # Application definition
@@ -159,7 +159,7 @@ SOCIAL_AUTH_PIPELINE = (
 # Replace database setting to use postgresql on Heroku
 import dj_database_url
 db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
+#DATABASES['default'].update(db_from_env)
 
 # Setup upload directory for Gig model
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

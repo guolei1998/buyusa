@@ -64,8 +64,8 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">LOGO</label>
                     <div class="col-sm-4">
-                        <p><img src="{{ MEDIA_URL }}{{ gig.BrandLogo }}" width="400px"></p>
-                        <input type="file" class="form-control" name="BrandLogo">
+                        <!--p><img src="{{ MEDIA_URL }}{{ gig.BrandLogo }}" width="400px"></p-->
+                        {{ gig_form.BrandLogo|add_class:'form-control' }}
                     </div>
                 </div>
                 <div class="form-group">
@@ -105,33 +105,61 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">PHOTO 1</label>
                     <div class="col-sm-4">
-                        <p><img src="{{ MEDIA_URL }}{{ gig.BrandPicture1 }}" width="400px"></p>
-                        <input type="file" class="form-control" name="BrandPicture1">
+                        {{ gig_form.BrandPicture1|add_class:'form-control' }}
                     </div>
                     <label class="col-sm-2 control-label">PHOTO 2</label>
                     <div class="col-sm-4">
-                        <p><img src="{{ MEDIA_URL }}{{ gig.BrandPicture2 }}" width="400px"></p>
-                        <input type="file" class="form-control" name="BrandPicture2">
+                        {{ gig_form.BrandPicture2|add_class:'form-control' }}
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">BrandCaption1</label>
+                    <div class="col-sm-4">
+                        {{ gig_form.BrandCaption1|add_class:'form-control' }}
+                    </div>
+                    <label class="col-sm-2 control-label">BrandCaption2</label>
+                    <div class="col-sm-4">
+                        {{ gig_form.BrandCaption2|add_class:'form-control' }}
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">PHOTO 3</label>
                     <div class="col-sm-4">
-                        <p><img src="{{ MEDIA_URL }}{{ gig.BrandPicture3 }}" width="400px"></p>
-                        <input type="file" class="form-control" name="BrandPicture3">
+                        {{ gig_form.BrandPicture3|add_class:'form-control' }}
                     </div>
                     <label class="col-sm-2 control-label">PHOTO 4</label>
                     <div class="col-sm-4">
-                        <p><img src="{{ MEDIA_URL }}{{ gig.BrandPicture4 }}" width="400px"></p>
-                        <input type="file" class="form-control" name="BrandPicture4">
+                        {{ gig_form.BrandPicture4|add_class:'form-control' }}
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">BrandCaption3</label>
+                    <div class="col-sm-4">
+                        {{ gig_form.BrandCaption3|add_class:'form-control' }}
+                    </div>
+                    <label class="col-sm-2 control-label">BrandCaption4</label>
+                    <div class="col-sm-4">
+                        {{ gig_form.BrandCaption4|add_class:'form-control' }}
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">PHOTO 5</label>
                     <div class="col-sm-4">
-                        <p><img src="{{ MEDIA_URL }}{{ gig.BrandPicture5 }}" width="400px"></p>
-                        <input type="file" class="form-control" name="BrandPicture5">
+                        {{ gig_form.BrandPicture5|add_class:'form-control' }}
                     </div>
                     <label class="col-sm-2 control-label">PHOTO 6</label>
                     <div class="col-sm-4">
-                        <p><img src="{{ MEDIA_URL }}{{ gig.BrandPicture6 }}" width="400px"></p>
-                        <input type="file" class="form-control" name="BrandPicture6">
+                        {{ gig_form.BrandPicture6|add_class:'form-control' }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">BrandCaption5</label>
+                    <div class="col-sm-4">
+                        {{ gig_form.BrandCaption5|add_class:'form-control' }}
+                    </div>
+                    <label class="col-sm-2 control-label">BrandCaption6</label>
+                    <div class="col-sm-4">
+                        {{ gig_form.BrandCaption6|add_class:'form-control' }}
                     </div>
                 </div>
                 <div class="form-group">

@@ -38,7 +38,19 @@ class Profile(models.Model):
     CompanyContactEmail = models.CharField(max_length=50, default='')
     CompanyJoined = models.DateTimeField(default=timezone.now)
     # *** END - Fields added for BuyUSA - TCG - 1/19/18 ***
-
+    ImportedCompanyID = models.CharField(max_length=50, default='') 
+    # 1-126 (This id will be the concatenation of the read-only table’s ImportID field, a “-“, and the companyID from the import. 
+    # The reason is this: what if we have 3 sources that all use the same company ID number? This way we can differentiate them.)
+    CompanyID = models.IntegerField(null=True)  # This is an auto generated incrementing number (per company, not per row)
+    flag = models.BooleanField(default=False) 
+    # A flag should be added to the user table for each of these users created from new imported records as a boolean of whether 
+    # or not the user has logged into the site yet
+    LoginLink = models.CharField(max_length=50, default='') 
+    # Also, a link should be created and added to a new column called “LoginLink”. 
+    # This url will be sent to new users (using the address listed in the “Email” column) 
+    # so they can log in one time and then change their password and begin using the site, 
+    # updating their profile, adding new gigs, etc.
+    # *** END - Fields added for BuyUSA - Dan Kwok - 5/5/18 ***
     def __str__(self):
         return self.user.username
     
@@ -62,19 +74,19 @@ class Gig(models.Model):
     title = models.CharField(max_length=500)
     category = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default='')
     description = RichTextField(max_length=1000, default='')
-    BrandLogo = models.FileField(upload_to='gigs', default='')
+    BrandLogo = models.FileField(upload_to='gigs')
     BrandLink = models.CharField(max_length=50, default='')
     BrandCustomerServicePhone = models.CharField(max_length=50, default='')
     BrandSearch = models.CharField(max_length=500, default='')
     BrandWhereToBuy = models.CharField(max_length=200, default='')
     # price = models.IntegerField(default=6)
     # photo = models.FileField(upload_to='gigs', default='')
-    BrandPicture1 =  models.FileField(upload_to='gigs', default='')
-    BrandPicture2 =  models.FileField(upload_to='gigs', default='')
-    BrandPicture3 =  models.FileField(upload_to='gigs', default='')
-    BrandPicture4 =  models.FileField(upload_to='gigs', default='')
-    BrandPicture5 =  models.FileField(upload_to='gigs', default='')
-    BrandPicture6 =  models.FileField(upload_to='gigs', default='') #　added by guolei 02/23/2017
+    BrandPicture1 =  models.FileField(upload_to='gigs')
+    BrandPicture2 =  models.FileField(upload_to='gigs')
+    BrandPicture3 =  models.FileField(upload_to='gigs')
+    BrandPicture4 =  models.FileField(upload_to='gigs')
+    BrandPicture5 =  models.FileField(upload_to='gigs')
+    BrandPicture6 =  models.FileField(upload_to='gigs') #　added by guolei 02/23/2017
     BrandCaption1 = models.CharField(max_length=200, default='')
     BrandCaption2 = models.CharField(max_length=200, default='')
     BrandCaption3 = models.CharField(max_length=200, default='')
@@ -84,7 +96,12 @@ class Gig(models.Model):
     status = models.BooleanField(default=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     create_time = models.DateTimeField(default=timezone.now)
-
+    # *** BEGIN - Fields added for BuyUSA - Dan Kwok - 5/5/18 ***
+    BrandID = models.IntegerField(null=True)
+    # BrandID: This is an auto generated incrementing number (per row). So for the three brands in companyID=126, 
+    # there will be three records sharing the same CompanyID (parent), but unique Brand IDs (children).
+    CompanyID = models.IntegerField(null=True)
+    # *** END - Fields added for BuyUSA - Dan Kwok - 5/5/18 ***
     def __str__(self):
         return self.title
 
@@ -104,3 +121,43 @@ class Review(models.Model):
     def __str__(self):
         return self.content
 
+class Donate(models.Model):
+    username = models.CharField(verbose_name='User name',max_length=200)
+    donatevalue = models.FloatField(verbose_name='Donate value')
+    cardtype = models.CharField(verbose_name='Card type',max_length=200)
+    cc_number = models.CharField(verbose_name='Card number',max_length=200)
+    cc_exp_date = models.CharField(verbose_name='Expire date',max_length=200)
+    cc_ccv = models.CharField(verbose_name='Card ccv',max_length=200)
+    holdername = models.CharField(verbose_name='Card holdername',max_length=200)
+    
+    def __str__(self):
+        return self.donatevalue
+    
+class ImportData(models.Model):
+    companyid = models.CharField(max_length=20)
+    company = models.CharField(max_length=200)
+    employees = models.CharField(max_length=200)
+    phone = models.CharField(max_length=20)
+    url = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    psic = models.CharField(max_length=20)
+    brandnames = models.CharField(max_length=500)
+    salutation = models.CharField(max_length=20)
+    firstname = models.CharField(max_length=20)
+    middlename = models.CharField(max_length=20)
+    lastname = models.CharField(max_length=20)
+    suffix = models.CharField(max_length=20)
+    gender = models.CharField(max_length=20)
+    titleext = models.CharField(max_length=500)
+    ImportSource = models.CharField(max_length=200)
+    # Every new record being imported should have the value of "3rd Party - XYZ Data” in the ImportSource column.
+    ImportTimestamp = models.DateTimeField(auto_now_add=True)
+    # Additionally, a time-date stamp of the import should be added as a new column in the table.
+    # The column name should be ImportTimestamp. This should be listed on every record of this specific import.
+    ImportID = models.IntegerField(default=1)
+    # One final new column called “ImportID" should be added. This will simply be a number (start with 1). 
+    # Every time there is a new import, the number will be incremented by 1. 
+    # Every record from that import will have whatever the latest incremented number is listed in this column. 
+    # For example, for our first import, the number 1 will be in Import ID for every record brought in during the import.
+    
+    
