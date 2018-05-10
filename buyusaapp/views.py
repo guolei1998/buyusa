@@ -21,7 +21,7 @@ import payeezy
 # Create your views here.
 def home(request):
     title = request.GET.get('title')
-    gigs = Gig.objects.filter(status=True)
+    gigs = Gig.objects.filter(status=True,Publish=True,user__profile__Publish=True)
     return render(request, 'home.html', {"gigs": gigs, "MEDIA_URL" : settings.MEDIA_URL, 'title': title})
 
 def gig_detail(request, id):
@@ -109,11 +109,14 @@ def profile(request, username):
     profile_form=None
     if request.method == 'POST' :
         profile = Profile.objects.get(user=request.user)
+        #oldprofileflag = profile.Publish
         profile_form = ProfileForm(request.POST,request.FILES,instance=profile)
         if profile_form.is_valid():
             profile = profile_form.save(commit=False)
             profile.avatar = file_save_to_media(profile_form.cleaned_data.get('avatar'))        
             profile.save()
+            #if oldprofileflag != profile.Publish:
+                #Gig.objects.filter(user=profile.user,Publish=oldprofileflag).update(Publish=profile.Publish)
     else:
         try:
             profile = Profile.objects.get(user__username=username)
@@ -464,7 +467,7 @@ def process_importdata(impdata):
             gig.save(update_fields=['BrandID',])
         email = impdata.email
         sendmailbythread([email,], u'[buyusa] Please do your first login and change password',
-                         u'Please do your first login and change password：http://stormy-beach-97292.herokuapp.com/firstlogin/%s' % (user.profile.LoginLink,))
+                         u'Please do your first login and change password：%s/firstlogin/%s' % (settings.SITE_URL,user.profile.LoginLink,))
 
 @login_required(login_url="/login")
 @transaction.atomic

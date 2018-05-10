@@ -14,7 +14,7 @@ class GigForm(ModelForm):
     BrandPicture5 = forms.ImageField(widget=ImagePreviewInput(),label=u'BrandPicture5',required=False)
     BrandPicture6 = forms.ImageField(widget=ImagePreviewInput(),label=u'BrandPicture6',required=False)
     
-    status = forms.ChoiceField(choices=[(True,'Active'),(False,'Disabled')])
+    Publish = forms.ChoiceField(choices=[(True,'Published'),(False,'Unpublished')])
     class Meta:
         model = Gig
         # *** BEGIN - Update fields - TCG - 1/28/18 ***
@@ -22,7 +22,7 @@ class GigForm(ModelForm):
         fields = ['title', 'category', 'description', 'BrandLogo', 'BrandLink', 'BrandCustomerServicePhone', 'BrandSearch',
                   'BrandWhereToBuy', 'BrandPicture1', 'BrandPicture2', 'BrandPicture3', 'BrandPicture4', 'BrandPicture5', 
                   'BrandPicture6','BrandCaption1','BrandCaption2','BrandCaption3','BrandCaption4','BrandCaption5',
-                  'BrandCaption6','status']
+                  'BrandCaption6','Publish']
         
         
 
@@ -44,13 +44,16 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'password1', 'password2', )
 
 class ProfileForm(ModelForm):
-    avatar = forms.ImageField()
-    CompanyLogo = forms.ImageField()
+    #avatar = forms.ImageField()
+    #CompanyLogo = forms.ImageField()
+    avatar = forms.ImageField(widget=ImagePreviewInput(),label=u'avatar')
+    CompanyLogo = forms.ImageField(widget=ImagePreviewInput(),label=u'CompanyLogo')
+    Publish = forms.ChoiceField(choices=[(True,'Published'),(False,'Unpublished')])
     class Meta:
         model = Profile
         fields = ('avatar', 'about', 'slogan', 'CompanyName', 'CompanyCategory', 'CompanyType',
                   'CompanyLogo', 'CompanyLink', 'CompanyContactName', 'CompanyContactPhone',
-                  'CompanyContactEmail')
+                  'CompanyContactEmail','Publish')
         
 class ImportDataForm(forms.Form):
     source = forms.CharField(label=u'What is the source of this import?',required=True)

@@ -10,7 +10,7 @@
                   <th>
                     <th>Gig Title</th>
                     <!-- <th>Price ($)</th> -->
-                    <th>Status</th>
+                    <th>Publish</th>
                   </th>
                 </tr>
             </thead>
@@ -20,7 +20,7 @@
                         <td>{{ forloop.counter }}</td>
                         <td><a href="{% url 'edit_gig' gig.id%}">{{ gig.title }}</a></td>
                         <!-- <td>{{ gig.price }}</td> -->
-                        <td>{% if gig.status %}Active {% else %} Disabled {% endif %}</td>
+                        <td>{{ gig.get_Publish }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -51,6 +51,7 @@ class Profile(models.Model):
     # so they can log in one time and then change their password and begin using the site, 
     # updating their profile, adding new gigs, etc.
     # *** END - Fields added for BuyUSA - Dan Kwok - 5/5/18 ***
+    Publish = models.BooleanField(default=True)
     def __str__(self):
         return self.user.username
     
@@ -102,8 +103,19 @@ class Gig(models.Model):
     # there will be three records sharing the same CompanyID (parent), but unique Brand IDs (children).
     CompanyID = models.IntegerField(null=True)
     # *** END - Fields added for BuyUSA - Dan Kwok - 5/5/18 ***
+    Publish = models.BooleanField(default=True)
+    # i thought of something… i can’t remember if this is in there or not, but if you can add it if it is not, 
+    # I’d really appreciate it. can you add a “Publish” checkmark for the gig (brands/products), 
+    # as well as for the user/company profile? If Publish is selected, then it is made available to public for search results,
+    # public display, etc. Otherwise, it remains a private draft. also if the user/company profile is not published, 
+    # then I suppose the gigs (brands/products) should be disabled too. 
     def __str__(self):
         return self.title
+    def get_Publish(self):
+        rst = 'Published'
+        if not self.Publish:
+            rst = 'Unpublished'
+        return rst
 
 class Purchase(models.Model):
     gig = models.ForeignKey(Gig,on_delete=models.CASCADE)
@@ -131,7 +143,7 @@ class Donate(models.Model):
     holdername = models.CharField(verbose_name='Card holdername',max_length=200)
     
     def __str__(self):
-        return self.donatevalue
+        return '%s,%s' % (self.holdername,self.donatevalue)
     
 class ImportData(models.Model):
     companyid = models.CharField(max_length=20)
@@ -159,5 +171,7 @@ class ImportData(models.Model):
     # Every time there is a new import, the number will be incremented by 1. 
     # Every record from that import will have whatever the latest incremented number is listed in this column. 
     # For example, for our first import, the number 1 will be in Import ID for every record brought in during the import.
+    def __str__(self):
+        return self.company    
     
     
