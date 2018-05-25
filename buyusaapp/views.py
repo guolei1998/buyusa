@@ -459,6 +459,7 @@ def process_importdata(impdata):
         brands = impdata.brandnames.split('*')
         for b in brands:
             gig = Gig()
+            gig.category = 'C1'
             gig.title = b.strip()
             gig.user = user
             gig.CompanyID = user.profile.id
